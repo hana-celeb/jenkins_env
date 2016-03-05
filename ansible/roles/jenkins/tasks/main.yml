@@ -1,0 +1,7 @@
+---
+
+- include: repo.yml
+
+- include: server.yml
+
+- include: plugins.yml

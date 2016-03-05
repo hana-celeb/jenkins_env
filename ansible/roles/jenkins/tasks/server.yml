@@ -1,0 +1,21 @@
+---
+
+- name: Install Jenkins Package
+  apt:
+    pkg: "jenkins"
+    state: latest
+  notify: start jenkins
+
+- name: Install Japanese font
+  apt:
+    pkg: "fonts-ipafont-gothic"
+    state: latest
+  notify: restart jenkins
+
+- name: Install Japanese font to JavaHome
+  file: 
+    src: "/etc/alternatives/fonts-japanese-gothic.ttf"
+    dest: "/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/fonts-japanese-gothic.ttf"
+    owner: root
+    group: root
+    state: link

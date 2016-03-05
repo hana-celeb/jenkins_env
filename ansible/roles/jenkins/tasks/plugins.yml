@@ -1,0 +1,45 @@
+---
+
+- name: Install cURL
+  apt:
+    pkg: "curl"
+    state: latest
+  tags:
+    - jenkins
+
+- name: Check jenkins-cli.jar exists
+  stat: path=/var/lib/jenkins/jenkins-cli.jar
+  register: jenkins_cli_stat
+
+- name: Check update-center.json exists
+  stat: path=/var/lib/jenkins/update-center.json
+  register: jenkins_update_center_json_stat
+
+- name: Download jenkins-cli
+  get_url: url=http://localhost:8080/jnlpJars/jenkins-cli.jar dest=/var/lib/jenkins/jenkins-cli.jar mode=0440
+  when: jenkins_cli_stat.stat.exists == False
+  tags:
+    - jenkins
+
+- name: Download update-center.json
+  get_url: url=http://updates.jenkins-ci.org/update-center.json dest=/var/lib/jenkins/update-center.json mode=0440
+  when: jenkins_update_center_json_stat.stat.exists == False
+  tags:
+    - jenkins
+
+- name: Update plugin list
+  environment:
+    REQ_HEAD: "'Accept: application/json'"
+  command: curl -X POST -H $REQ_HEAD -d @/var/lib/jenkins/update-center.json http://localhost:8080/updateCenter/byId/default/postBack;
+  when: jenkins_update_center_json_stat.stat.exists == False
+  tags:
+    - jenkins
+
+# 認証を設定すると動作しないので、一先ずjenkins-cliをインストール時のみプラグインをインストールしている
+- name: Install Jenkins Packages
+  command: "sudo /usr/bin/java -jar /var/lib/jenkins/jenkins-cli.jar -s http://localhost:8080 install-plugin {{ item }}"
+  with_flattened:
+    - jenkins_packages
+    - jenkins_option_packages
+  when: jenkins_cli_stat.stat.exists == False
+  notify: restart jenkins

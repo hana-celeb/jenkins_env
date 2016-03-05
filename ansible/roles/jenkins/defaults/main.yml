@@ -1,0 +1,17 @@
+jenkins_packages:
+    - git
+    - github
+    - ghprb
+    - checkstyle
+    - cloverphp
+    - dry
+    - htmlpublisher
+    - jdepend
+    - plot
+    - pmd
+    - violations
+    - xunit
+    - phing
+    - slack
+
+jenkins_option_packages: []
