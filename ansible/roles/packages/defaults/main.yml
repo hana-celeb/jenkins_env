@@ -1,0 +1,9 @@
+---
+
+packages_packages:
+  - git-core
+  - vim
+  - tree
+  - curl
+
+packages_option_packages: []

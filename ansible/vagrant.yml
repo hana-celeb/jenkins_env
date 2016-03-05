@@ -1,0 +1,9 @@
+- name: HanaCeleb Jenkins Server
+  hosts: jenkins
+  sudo: true
+  connection: local
+
+  roles:
+    - packages
+  vars_files:
+    - files/packages.yml

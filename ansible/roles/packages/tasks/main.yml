@@ -1,0 +1,12 @@
+---
+- name: Get Latest apt package list
+  sudo: true
+  apt: update_cache=yes
+
+- name: Install Base Packages
+  apt:
+    pkg: "{{ item }}"
+    state: present
+  with_flattened:
+    - packages_packages
+    - packages_option_packages
