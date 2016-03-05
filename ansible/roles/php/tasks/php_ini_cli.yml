@@ -1,0 +1,27 @@
+---
+- name: Configure timezone
+  action: ini_file dest=/etc/php5/cli/php.ini section=Date option=date.timezone value={{ php_timezone }} backup=yes
+
+- name: Configure language
+  action: ini_file dest=/etc/php5/cli/php.ini section=mbstring option=mbstring.language value={{ php_language }} backup=yes
+
+- name: Configure internal encoding
+  action: ini_file dest=/etc/php5/cli/php.ini section=mbstring option=mbstring.internal_encoding value={{ php_internal_encoding }} backup=yes
+
+- name: Configure memory limit
+  action: ini_file dest=/etc/php5/cli/php.ini section=PHP option=memory_limit value={{ php_cli_memory_limit }} backup=yes
+
+- name: Configure post max size
+  action: ini_file dest=/etc/php5/cli/php.ini section=PHP option=post_max_size value={{ php_post_max_size }} backup=yes
+
+- name: Configure upload max filesize
+  action: ini_file dest=/etc/php5/cli/php.ini section=PHP option=upload_max_filesize value={{ php_upload_max_filesize }} backup=yes
+
+- name: Configure expose_php
+  action: ini_file dest=/etc/php5/cli/php.ini section=PHP option=expose_php value={{ php_expose_php }} backup=yes
+
+- name: Configure max input time
+  action: ini_file dest=/etc/php5/cli/php.ini section=PHP option=max_input_time value={{ php_max_input_time }} backup=yes
+
+- name: Configure max execution time
+  action: ini_file dest=/etc/php5/cli/php.ini section=PHP option=max_execution_time value={{ php_max_execution_time }} backup=yes

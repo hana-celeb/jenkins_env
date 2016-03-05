@@ -1,0 +1,13 @@
+---
+
+- name: Install cURL
+  apt:
+    pkg: "curl"
+    state: present
+
+- stat: path=/usr/local/bin/composer
+  register: composer_status
+
+- name: Install Composer command
+  shell: curl -sS https://getcomposer.org/installer | php ;mv composer.phar /usr/local/bin/composer chdir=/usr/local
+  when: composer_status.stat.exists == False

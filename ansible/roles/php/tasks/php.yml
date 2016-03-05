@@ -1,0 +1,32 @@
+---
+
+- name: Install PHP Packages
+  apt:
+    pkg: "{{ item }}"
+    state: present
+  with_flattened:
+    - php_packages
+    - php_option_packages
+
+- name: Install Development Packages
+  apt:
+    pkg: "{{ item }}"
+    state: present
+  with_flattened:
+    - php_development_packages
+    - php_development_option_packages
+  when: php_development is defined and php_development == True
+
+# モジュールがアクティブかチェックする
+- name: Check php modules
+  stat: path=/etc/php5/fpm/conf.d/20-{{ item }}.ini
+  register: php_module_status
+  with_flattened:
+    - php_modules
+    - php_option_modules
+
+# アクティブでないモジュールのみenmodする
+- name: Activate php modules
+  command: php5enmod {{ item.item }}
+  with_items: php_module_status.results
+  when: item.stat.exists == false

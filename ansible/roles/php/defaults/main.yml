@@ -1,0 +1,43 @@
+php_packages:
+  - php5
+  - php5-cli
+  - php5-curl
+  - php-pear
+  - php5-gd
+  - php5-xsl
+  - php5-mcrypt
+  - php5-dev
+  - php5-fpm
+  - php5-imagick
+  - php5-intl
+
+php_development_packages:
+  - php5-xdebug
+  - php5-xhprof
+  - graphviz
+
+php_option_packages: []
+php_development_option_packages: []
+
+php_modules:
+  - mcrypt
+
+php_option_modules: []
+
+php_timezone: 'Asia/Tokyo'
+php_language: 'Japanese'
+php_internal_encoding: 'UTF-8'
+php_memory_limit: '128M'
+php_cli_memory_limit: '128M'
+php_post_max_size: '20M'
+php_upload_max_filesize: '20M'
+php_expose_php: 'Off'
+php_max_input_time: '300'
+php_max_execution_time: '300'
+
+php_development: False
+
+php_fpm: {
+  user: 'www-data',
+  group: 'www-data'
+}
