@@ -13,5 +13,6 @@ jenkins_packages:
     - xunit
     - phing
     - slack
+    - build-pipeline-plugin
 
 jenkins_option_packages: []
