@@ -1,0 +1,12 @@
+---
+
+- name: Send notification message via Slack
+  local_action:
+    module: slack
+    domain: "{{ item.domain }}"
+    token: "{{ item.token }}"
+    channel: "{{ item.channel }}"
+    msg: "{{ inventory_hostname }} {{ item.message }}"
+  with_items: notifications_slack
+  when: notifications_slack is defined
+  sudo: no

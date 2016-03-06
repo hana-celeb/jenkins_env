@@ -6,7 +6,12 @@
     - packages
     - jenkins
     - php
+    - selenium
+
+  tasks:
+    - include: roles/notifications/tasks/slack.yml
 
   vars_files:
     - files/packages.yml
     - files/php.yml
+    - files/slack.yml

@@ -1,0 +1,11 @@
+---
+
+- name: Install Selenium packages
+  apt:
+    pkg: "{{ item }}"
+    state: latest
+  with_items:
+    - "xvfb"
+    - "firefox"
+  tags:
+    - jenkins
