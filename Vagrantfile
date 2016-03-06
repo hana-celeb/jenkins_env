@@ -23,6 +23,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
      :group => "www-data",
      :mount_options => ["dmode=775,fmode=664"]
 
+    jenkins.vm.synced_folder "application", "/home/vagrant/application",
+     id: "vagrant-root", :nfs => false,
+     :owner => "vagrant",
+     :group => "www-data",
+     :mount_options => ["dmode=775,fmode=664"]
+
     jenkins.vm.provision "shell", inline: <<-SHELL
       apt-get -y --force-yes install ansible
       cd /vagrant/ansible; ansible-playbook -i hosts/localhost vagrant.yml

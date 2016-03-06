@@ -1,0 +1,3 @@
+## azureにリネームしてIPアドレスを設定してください
+[jenkins]
+ipアドレス ansible_ssh_host=ipアドレス

@@ -4,6 +4,7 @@
   apt:
     pkg: "jenkins"
     state: latest
+    force: yes
   notify: start jenkins
 
 - name: Install Japanese font
