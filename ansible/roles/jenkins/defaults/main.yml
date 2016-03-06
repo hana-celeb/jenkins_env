@@ -15,5 +15,6 @@ jenkins_packages:
     - slack
     - build-pipeline-plugin
     - ssh
-    
+    - xvfb
+
 jenkins_option_packages: []
